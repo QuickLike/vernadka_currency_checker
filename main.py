@@ -12,6 +12,7 @@ from currency import get_currency
 async def main():
     load_dotenv()
     token = os.getenv('BOT_TOKEN')
+    user_id = os.getenv('USER_ID')
     bot = Bot(token)
     logging.basicConfig(
         level=logging.INFO,
@@ -26,7 +27,7 @@ async def main():
                 logging.error(e)
                 await asyncio.sleep(10)
             else:
-                await bot.send_message(343798461, text=f'Покупка: {currency[0]}\nПродажа: {currency[1]}')
+                await bot.send_message(user_id, text=f'Покупка: {currency[0]}\nПродажа: {currency[1]}')
                 await asyncio.sleep(3600)
 
 
