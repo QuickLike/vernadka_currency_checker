@@ -36,7 +36,7 @@ async def main():
                 logging.info(constraints.SEND_MESSAGE.format(currency=currency))
                 await bot.send_message(
                     chat_id=user_id,
-                    text=constraints.SEND_MESSAGE.format(currency)
+                    text=constraints.SEND_MESSAGE.format(currency=currency)
                 )
         elif bot_work_type == constraints.SCHEDULE:
             if not isinstance(SEND_TIME, int):
