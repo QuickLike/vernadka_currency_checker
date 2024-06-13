@@ -23,6 +23,7 @@ def draw_graph(data: list | tuple, interval: str = 'daily'):
         plt.savefig(filename)
     except Exception as e:
         return e
+    plt.close()
     return filename
 
 

@@ -65,6 +65,7 @@ async def main():
                 photo=FSInputFile(file_name),
                 caption='График изменения курса $ за прошедшую неделю.',
             )
+            await asyncio.sleep(3600)
         elif datetime.today().hour == 0 and datetime.today().weekday() not in [0, 5, 6]:
             currencies = db.get_daily_currencies()
             file_name = draw_graph(currencies, interval='daily')
@@ -73,6 +74,7 @@ async def main():
                 photo=FSInputFile(file_name),
                 caption='График изменения курса $ за прошедший день.',
             )
+            await asyncio.sleep(3600)
 
 
 if __name__ == '__main__':
