@@ -2,8 +2,10 @@ from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import requests
 
+from constraints import USD_FIELDS
 
-def get_currency() -> tuple[str, str]:
+
+def get_currency() -> dict[str, list]:
     """Returns currency -> (Buy, Sell)"""
     url = 'https://vernadka-valyuta.ru/'
     headers = {'User-Agent': UserAgent().random}
@@ -14,11 +16,10 @@ def get_currency() -> tuple[str, str]:
     if r.status_code != 200:
         raise ConnectionError(f"Status code: {r.status_code}")
     soup = BeautifulSoup(r.text, 'lxml')
-    currency = (
-        soup.find('div', field='tn_text_1680795335003').text,
-        soup.find('div', field='tn_text_1680795214553').text
-    )
-    return currency
+    currencies = {}
+    for name, fields in USD_FIELDS.items():
+        currencies[name] = [soup.find('div', field=field).text for field in fields]
+    return currencies
 
 
 if __name__ == '__main__':
